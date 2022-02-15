@@ -1,0 +1,36 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+person(x) -> human(x) | vampire(x).
+human(x) -> -vampire(x).
+vampire(x) -> -human(x).
+human(x) -> sane(x) | insane(x).
+vampire(x) -> sane(x) | insane(x).
+human(x) & sane(x) -> truth(x).
+vampire(x) & insane(x) -> truth(x).
+human(x) & insane(x) -> -truth(x).
+vampire(x) & sane(x) -> -truth(x).
+person(Karl) & person(Martha).
+Karl != Martha.
+(exists x vampire(x)) & (exists x human(x)). 
+(exists x insane(x)) & (exists x sane(x)).
+truth(Karl) -> vampire(Martha).
+truth(Martha) -> insane(Karl).
+
+end_of_list.
+
+formulas(goals).
+
+end_of_list.
+

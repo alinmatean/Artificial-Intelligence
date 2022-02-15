@@ -1,0 +1,11 @@
+interpretation( 2, [number = 1,seconds = 0], [
+    function(Lucy, [0]),
+    function(Minna, [1]),
+    function(c1, [0]),
+    function(c2, [1]),
+    relation(human(_), [0,1]),
+    relation(insane(_), [0,0]),
+    relation(person(_), [1,1]),
+    relation(sane(_), [1,1]),
+    relation(truth(_), [0,1]),
+    relation(vampire(_), [1,0])]).

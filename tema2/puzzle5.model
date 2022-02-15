@@ -1,0 +1,13 @@
+interpretation( 2, [number = 1,seconds = 0], [
+    function(Karl, [0]),
+    function(Martha, [1]),
+    function(c1, [0]),
+    function(c2, [1]),
+    function(c3, [1]),
+    function(c4, [0]),
+    relation(human(_), [0,1]),
+    relation(insane(_), [0,1]),
+    relation(person(_), [1,1]),
+    relation(sane(_), [1,0]),
+    relation(truth(_), [0,0]),
+    relation(vampire(_), [1,0])]).

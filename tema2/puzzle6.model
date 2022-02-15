@@ -1,0 +1,8 @@
+interpretation( 2, [number = 1,seconds = 0], [
+    function(A, [0]),
+    relation(asleep(_), [0,0]),
+    relation(awake(_), [1,0]),
+    relation(believe(_), [0,0]),
+    relation(diurnal(_), [0,0]),
+    relation(inhabitant(_), [1,0]),
+    relation(nocturnal(_), [1,0])]).

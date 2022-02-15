@@ -1,0 +1,173 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+differentFrom(agent1, agent2).
+differentFrom(agent1, agent3).
+differentFrom(agent1, agent4).
+differentFrom(agent1, agent5).
+
+differentFrom(agent2, agent3).
+differentFrom(agent2, agent4).
+differentFrom(agent2, agent5).
+
+differentFrom(agent3, agent4).
+differentFrom(agent3, agent5).
+
+differentFrom(agent4, agent5).
+
+differentFrom(x, y) -> differentFrom(y, x).
+
+%y to the right of x
+to_the_right(agent1, agent2).
+to_the_right(agent2, agent3).
+to_the_right(agent3, agent4).
+to_the_right(agent4, agent5). 
+
+-to_the_right(agent1, agent1).
+-to_the_right(agent1, agent3).
+-to_the_right(agent1, agent4).
+-to_the_right(agent1, agent5).
+
+-to_the_right(agent2, agent1).
+-to_the_right(agent2, agent2).
+-to_the_right(agent2, agent4).
+-to_the_right(agent2, agent5).
+
+-to_the_right(agent3, agent1).
+-to_the_right(agent3, agent2).
+-to_the_right(agent3, agent3).
+-to_the_right(agent3, agent5).
+
+-to_the_right(agent4, agent1).
+-to_the_right(agent4, agent2).
+-to_the_right(agent4, agent3).
+-to_the_right(agent4, agent4).
+
+-to_the_right(agent5, agent1).
+-to_the_right(agent5, agent2).
+-to_the_right(agent5, agent3).
+-to_the_right(agent5, agent4).
+-to_the_right(agent5, agent5).
+
+%y is somewhere to the right of x
+somewhere_right(agent1, agent2).
+somewhere_right(agent1, agent3).
+somewhere_right(agent1, agent4).
+somewhere_right(agent1, agent5).
+
+somewhere_right(agent2, agent3).
+somewhere_right(agent2, agent4).
+somewhere_right(agent2, agent5).
+
+somewhere_right(agent3, agent4).
+somewhere_right(agent3, agent5).
+
+somewhere_right(agent4, agent5).
+
+-somewhere_right(agent1, agent1).
+
+-somewhere_right(agent2, agent1).
+-somewhere_right(agent2, agent2).
+
+-somewhere_right(agent3, agent1).
+-somewhere_right(agent3, agent2).
+-somewhere_right(agent3, agent3).
+
+-somewhere_right(agent4, agent2).
+-somewhere_right(agent4, agent2).
+-somewhere_right(agent4, agent2).
+-somewhere_right(agent4, agent2).
+
+-somewhere_right(agent5, agent1).
+-somewhere_right(agent5, agent2).
+-somewhere_right(agent5, agent3).
+-somewhere_right(agent5, agent4).
+-somewhere_right(agent5, agent5).
+
+to_the_right(x, y) & to_the_right(y, z) <-> between(x, y, z).
+to_the_right(x, y) | to_the_right(y, x) <-> next_to(x, y).
+
+black(x) | blue(x) | green(x) | purple(x) | red(x).
+Austin(x) | James(x) | Jason(x) | Stan(x) | Sterling(x).
+Australia(x) | Brazil(x) | Germany(x) | Libya(x) | Russia(x).
+clock(x) | pen(x) | phone(x) | ring(x) | umbrella(x).
+computer_hacking(x) | disguise(x) | driving(x) | martial_arts(x) | parkour(x).
+age25(x) | age30(x) | age35(x) | age40(x) | age45(x).
+
+black(x) & black(y) -> -differentFrom(x,y).
+blue(x) & blue(y)-> -differentFrom(x, y).
+green(x) & green(y) -> -differentFrom(x,y).
+purple(x) & purple(y) -> -differentFrom(x,y).
+red(x) & red(y) -> -differentFrom(x,y).
+
+Austin(x) & Austin(y) -> -differentFrom(x,y).
+James(x) & James(y) -> -differentFrom(x,y).
+Jason(x) & Jason(y) -> -differentFrom(x,y).
+Stan(x) & Stan(y) -> -differentFrom(x,y).
+Sterling(x) & Sterling(y) -> -differentFrom(x,y).
+
+Australia(x) & Australia(y) -> -differentFrom(x,y).
+Brazil(x) & Brazil(y) -> -differentFrom(x,y).
+Germany(x) & Germany(y) -> -differentFrom(x,y).
+Libya(x) & Libya(y) -> -differentFrom(x,y).
+Russia(x) & Russia(y) -> -differentFrom(x,y).
+
+clock(x) & clock(y) -> -differentFrom(x,y).
+pen(x) & pen(y) -> -differentFrom(x,y).
+phone(x) & phone(y) -> -differentFrom(x,y).
+ring(x) & ring(y) -> -differentFrom(x,y).
+umbrella(x) & umbrella(y) -> -differentFrom(x,y).
+
+computer_hacking(x) & computer_hacking(y) -> -differentFrom(x,y).
+disguise(x) & disguise(y) -> -differentFrom(x,y).
+driving(x) & driving(y) -> -differentFrom(x,y).
+martial_arts(x) & martial_arts(y) -> -differentFrom(x,y).
+parkour(x) & parkour(y) -> -differentFrom(x,y).
+
+age25(x) & age25(y) -> -differentFrom(x,y).
+age30(x) & age30(y) -> -differentFrom(x,y).
+age35(x) & age35(y) -> -differentFrom(x,y).
+age40(x) & age40(y) -> -differentFrom(x,y).
+age45(x) & age45(y) -> -differentFrom(x,y).
+
+%The clues
+Austin(x) & black(y) -> next_to(x, y).
+umbrella(x) & disguise(y) -> to_the_right(x, y).
+age35(x) <-> Libya(x).
+James(x) <-> age25(x).
+Australia(x) & parkour(y) -> next_to(x, y).
+clock(x) & James(y) -> to_the_right(x, y).
+age40(x) & umbrella(y) & Austin(z) -> between(x,y,z).
+Stan(x) & Russia(y) -> next_to(x, y).
+Sterling(agent1) | Sterling(agent5).
+red(x) <-> age40(x).
+Brazil(x) & age45(y) -> to_the_right(x, y).
+
+Jason(x) & Austin(y) -> to_the_right(x,y).
+driving(x) & age30(y) -> next_to(x,y).
+Australia(x) & age35(y) -> next_to(x,y).
+computer_hacking(x) & age35(y) -> to_the_right(x,y).
+purple(x) & computer_hacking(y) -> next_to(x,y).
+Austin(x) <-> age30(x). 
+phone(x) & Libya(y) -> to_the_right(x,y).
+purple(x) & ring(y) -> somewhere_right(x, y).
+green(agent2).
+age30(x) & Australia(y) -> to_the_right(x, y).
+
+end_of_list.
+
+formulas(goals).
+
+end_of_list.
+

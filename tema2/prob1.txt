@@ -1,0 +1,409 @@
+Într-un spital sunt 5 saloane(a, b, c, d, e). În fiecare salon
+stă o persoana. Fiecare persoana are un nume diferit:
+Andrei, Bianca, Cosmin, Daniel, Elena. Persoanele au 
+vârste diferite(14,18,19,21,34), sunt din orașe diferite
+(Bistrița, Brașov, Cluj-Napoca, Iași, Sibiu) și suferă de diferite
+afecțiuni(gripă, covid, mână ruptă, picior rupt, toxinfecție alimentară). 
+Știm următoarele:
+
+- Cea mai tânără persoană stă în salonul 4.
+- Persoana care are mâna ruptă stă în salonul din stânga salonului în care stă persoana
+cu toxinfecție alimentară.
+- Persoana cu mâna ruptă este din Sibiu.
+- Persoana care este din Cluj-Napoca stă in salonul din dreapta salonului 
+unde stă persoana cu gripă.
+- Andrei este în vârstă de 21 de ani.
+- Din nefericire, Bianca are covid.
+- Cealaltă fată, Elena are 18 ani.
+- Cosmin și Daniel sunt vecini, Daniel stă în salonul cu număr mai mare.
+- Persona de 21 de ani si cea din Cluj stau în saloane alăturate.
+- Din Brașov este cea care a făcut toxinfecție alimentară.
+- Persoana care stă în salonul 3 este din Iași.
+- Persoana de 34 de ani și cea cu piciorul rupt stau una langă cealaltă.
+- Cosmin și-a rupt piciorul.
+
+
+
+
+inhabitant(x) -> knight(x) | knave(x) | spy(x).
+knight(x) -> -knave(x) & -spy(x).
+knave(x) -> -knight(x) & -spy(x).
+spy(x) -> -knight(x) & -knave(x).
+knight(x) -> m(x).
+knave(x) -> -m(x).
+
+%5.
+%inhabitant(a) & inhabitant(b) & inhabitant(c).
+%a != b & b != c & a != c.
+%(exists x knight(x)) & (exists x knave(x)) & (exists x spy(x)).
+%m(a) <-> knave(c) | spy(c).
+%m(b) <-> knight(a) | knave(a) | spy(a).
+%m(c) <-> knight(b) | knave(b) | spy(b).
+
+
+https://www.popularmechanics.com/science/math/a15886083/riddle-of-the-week-49-knights-and-knaves-part-7/
+
+man(x) -> knight(x) | knave(x) | spy(x).
+knight(x) -> -knave(x) & -spy(x).
+knave(x) -> -knight(x) & -spy(x).
+spy(x) -> -knight(x) & -knave(x).
+knight(x) -> truth(x).
+knave(x) -> -truth(x).
+man(blue) & man(red) & man(green).
+blue != red & blue != green & red != green.
+(exists x knight(x)) & (exists x knave(x)) & (exists x spy(x)).  
+truth(blue) -> -spy(blue).
+truth(red) -> knave(red).
+truth(green) -> spy(red).
+
+
+
+
+
+
+-----------------------------------------------------------------------------------
+differentFrom(woman1, woman2).
+differentFrom(woman1, woman3).
+differentFrom(woman1, woman4).
+differentFrom(woman1, woman5).
+
+differentFrom(woman2, woman3).
+differentFrom(woman2, woman4).
+differentFrom(woman2, woman5).
+
+differentFrom(woman3, woman4).
+differentFrom(woman3, woman5).
+
+differentFrom(woman4, woman5).
+
+differentFrom(x, y) -> differentFrom(y, x).
+
+next_to(woman1, woman2).
+next_to(woman2, woman3).
+next_to(woman3, woman4).
+next_to(woman4, woman5).
+
+next_to(x, y) -> next_to(y, x).
+
+-next_to(woman1, woman1).
+-next_to(woman1, woman3).
+-next_to(woman1, woman4).
+-next_to(woman1, woman5).
+-next_to(woman2, woman2).
+-next_to(woman2, woman4).
+-next_to(woman2, woman5).
+-next_to(woman3, woman3).
+-next_to(woman3, woman1).
+-next_to(woman3, woman5).
+-next_to(woman4, woman4).
+-next_to(woman4, woman1).
+-next_to(woman4, woman2).
+-next_to(woman5, woman5).
+-next_to(woman5, woman1).
+-next_to(woman5, woman2).
+-next_to(woman5, woman3).
+
+to_the_left(woman1, woman2). %woman1 is exactly to the left of woman2
+to_the_left(woman2, woman3).
+to_the_left(woman3, woman4).
+to_the_left(woman4, woman5).
+
+-to_the_left(woman1, woman1).
+-to_the_left(woman1, woman3).
+-to_the_left(woman1, woman4).
+-to_the_left(woman1, woman5).
+-to_the_left(woman2, woman2).
+-to_the_left(woman2, woman1).
+-to_the_left(woman2, woman4).
+-to_the_left(woman2, woman5).
+-to_the_left(woman3, woman3).
+-to_the_left(woman3, woman1).
+-to_the_left(woman3, woman2).
+-to_the_left(woman3, woman5).
+-to_the_left(woman4, woman4).
+-to_the_left(woman4, woman1).
+-to_the_left(woman4, woman2).
+-to_the_left(woman4, woman3).
+-to_the_left(woman5, woman5).
+-to_the_left(woman5, woman1).
+-to_the_left(woman5, woman2).
+-to_the_left(woman5, woman3).
+-to_the_left(woman5, woman4).
+
+somewhere_to_the_left(woman1, woman2).
+somewhere_to_the_left(woman1, woman3).
+somewhere_to_the_left(woman1, woman4).
+somewhere_to_the_left(woman1, woman5).
+somewhere_to_the_left(woman2, woman3).
+somewhere_to_the_left(woman2, woman4).
+somewhere_to_the_left(woman2, woman5).
+somewhere_to_the_left(woman3, woman4).
+somewhere_to_the_left(woman3, woman5).
+somewhere_to_the_left(woman4, woman5).
+
+-somewhere_to_the_left(woman1, woman1).
+-somewhere_to_the_left(woman2, woman1).
+-somewhere_to_the_left(woman2, woman2).
+-somewhere_to_the_left(woman3, woman1).
+-somewhere_to_the_left(woman3, woman2).
+-somewhere_to_the_left(woman3, woman3).
+-somewhere_to_the_left(woman4, woman1).
+-somewhere_to_the_left(woman4, woman2).
+-somewhere_to_the_left(woman4, woman3).
+-somewhere_to_the_left(woman4, woman4).
+-somewhere_to_the_left(woman5, woman1).
+-somewhere_to_the_left(woman5, woman2).
+-somewhere_to_the_left(woman5, woman3).
+-somewhere_to_the_left(woman5, woman4).
+-somewhere_to_the_left(woman5, woman5).
+
+somewhere_to_the_left(x, y) <-> somewhere_to_the_right(y, x).
+
+somewhere_to_the_left(x, y) & somewhere_to_the_right(z, y) <-> somewhere_between(x, y, z).
+
+
+black(x) | blue(x) | purple(x) | red(x) | white(x).
+Carmen(x) | Diana(x) | Jane(x) | Lidia(x) | Melissa(x).
+donation1(x) | donation2(x) | donation3(x) | donation4(x) | donation5(x).
+cosmopolitan(x) | daiquiri(x) | manhattan(x) | margarita(x) | martini(x).
+emerald(x) | moonstone(x) | pearl(x) | sapphire(x) | turquoise(x).
+age40(x) | age45(x) | age50(x) | age55(x) | age60(x).
+
+black(x) & black(y) -> -differenFrom(x, y).
+blue(x) & blue(y) -> -differenFrom(x, y).
+purple(x) & purple(y) -> -differenFrom(x, y).
+red(x) & red(y) -> -differenFrom(x, y).
+white(x) & white(y) -> -differenFrom(x, y).
+
+Carmen(x) & Carmen(y) -> -differenFrom(x, y).
+Dian(ax) & Diana(y) -> -differenFrom(x, y).
+Jane(x) & Jane(y) -> -differenFrom(x, y).
+Lidia(x) & Lidia(y) -> -differenFrom(x, y).
+Melissa(x) & Melissa(y) -> -differenFrom(x, y).
+
+donation1(x) & donation1(y) -> -differenFrom(x, y).
+donation2(x) & donation2(y) -> -differenFrom(x, y).
+donation3(x) & donation3(y) -> -differenFrom(x, y).
+donation4(x) & donation4(y) -> -differenFrom(x, y).
+donation5(x) & donation5(y) -> -differenFrom(x, y).
+
+cosmopolitan(x) & cosmopolitan(y) -> -differenFrom(x, y).
+daiquiri(x) & daiquiri(y) -> -differenFrom(x, y).
+manhattan(x) & manhattan(y) -> -differenFrom(x, y).
+margarita(x) & margarita(y) -> -differenFrom(x, y).
+martini(x) & martini(y) -> -differenFrom(x, y).
+
+
+emerald(x) & emerald(y) -> -differenFrom(x, y).
+moonstone(x) & moonstone(y) -> -differenFrom(x, y).
+pearl(x) & pearl(y) -> -differenFrom(x, y).
+sapphire(x) & sapphire(y) -> -differenFrom(x, y).
+turquoise(x) & turquoise(y) -> -differenFrom(x, y).
+
+age40(x) & age40(y) -> -differenFrom(x, y).
+age45(x) & age45(y) -> -differenFrom(x, y).
+age50(x) & age50(y) -> -differenFrom(x, y).
+age55(x) & age55(y) -> -differenFrom(x, y).
+age60(x) & age60(y) -> -differenFrom(x, y).
+
+
+%The clues
+donation3(x) & age40(y) -> to_the_left(x, y).
+Diana(x) & age50(y) -> to_the_left(x, y).
+emerald(x) & purple(y) -> to_the_left(x, y).
+pearl(x) <-> donation1(x).
+martini(x) & donation1(y) -> next_to(x, y).
+turquoise(x) <-> donation3(x).
+age60(x) & cosmopolitan(y) -> to_the_left(y, x).
+white(x) & donation5(y) -> next_to(x, y).
+donation2(x) & red(y) & donation4(z) -> somewhere_between(x, y, z).
+Lidia(x) & black(y) -> next_to(x, y).
+
+Jane(x) <-> donation2(x).
+cosmopolitan(x) & Melissa(y) -> to_the_left(x, y).
+blue(x) & margarita(y) -> somewhere_to_the_left(x, y).
+donation2(x) & daiquiri(y) -> to_the_left(x, y).
+pearl(x) & age50(y) -> to_the_left(x, y).
+Lidia(x) & cosmopolitan(y) -> next_to(x, y).
+black(x) & donation4(y) -> somewhere_to_the_left(x, y).
+age55(x) <-> sapphire(x).
+age60(x) & black(y) -> somewhere_to_the_right(x, y).
+red(x) & manhattan(y) -> to_the_left(x, y).
+white(x) & black(y) -> somewhere_to_the_left(x, y).
+
+
+
+
+
+
+
+
+SECRET AGENT
+----------------------------------------------------------------------------------------
+differentFrom(agent1, agent2).
+differentFrom(agent1, agent3).
+differentFrom(agent1, agent4).
+differentFrom(agent1, agent5).
+
+differentFrom(agent2, agent3).
+differentFrom(agent2, agent4).
+differentFrom(agent2, agent5).
+
+differentFrom(agent3, agent4).
+differentFrom(agent3, agent5).
+
+differentFrom(agent4, agent5).
+
+differentFrom(x, y) -> differentFrom(y, x).
+
+%y to the right of x
+to_the_right(agent1, agent2).
+to_the_right(agent2, agent3).
+to_the_right(agent3, agent4).
+to_the_right(agent4, agent5). 
+
+-to_the_right(agent1, agent1).
+-to_the_right(agent1, agent3).
+-to_the_right(agent1, agent4).
+-to_the_right(agent1, agent5).
+
+-to_the_right(agent2, agent1).
+-to_the_right(agent2, agent2).
+-to_the_right(agent2, agent4).
+-to_the_right(agent2, agent5).
+
+-to_the_right(agent3, agent1).
+-to_the_right(agent3, agent2).
+-to_the_right(agent3, agent3).
+-to_the_right(agent3, agent5).
+
+-to_the_right(agent4, agent1).
+-to_the_right(agent4, agent2).
+-to_the_right(agent4, agent3).
+-to_the_right(agent4, agent4).
+
+-to_the_right(agent5, agent1).
+-to_the_right(agent5, agent2).
+-to_the_right(agent5, agent3).
+-to_the_right(agent5, agent4).
+-to_the_right(agent5, agent5).
+
+%y is somewhere to the right of x
+somewhere_right(agent1, agent2).
+somewhere_right(agent1, agent3).
+somewhere_right(agent1, agent4).
+somewhere_right(agent1, agent5).
+
+somewhere_right(agent2, agent3).
+somewhere_right(agent2, agent4).
+somewhere_right(agent2, agent5).
+
+somewhere_right(agent3, agent4).
+somewhere_right(agent3, agent5).
+
+somewhere_right(agent4, agent5).
+
+-somewhere_right(agent1, agent1).
+
+-somewhere_right(agent2, agent1).
+-somewhere_right(agent2, agent2).
+
+-somewhere_right(agent3, agent1).
+-somewhere_right(agent3, agent2).
+-somewhere_right(agent3, agent3).
+
+-somewhere_right(agent4, agent2).
+-somewhere_right(agent4, agent2).
+-somewhere_right(agent4, agent2).
+-somewhere_right(agent4, agent2).
+
+-somewhere_right(agent5, agent1).
+-somewhere_right(agent5, agent2).
+-somewhere_right(agent5, agent3).
+-somewhere_right(agent5, agent4).
+-somewhere_right(agent5, agent5).
+
+to_the_right(x, y) & to_the_right(y, z) <-> between(x, y, z).
+to_the_right(x, y) | to_the_right(y, x) <-> next_to(x, y).
+
+black(x) | blue(x) | green(x) | purple(x) | red(x).
+Austin(x) | James(x) | Jason(x) | Stan(x) | Sterling(x).
+Australia(x) | Brazil(x) | Germany(x) | Libya(x) | Russia(x).
+clock(x) | pen(x) | phone(x) | ring(x) | umbrella(x).
+computer_hacking(x) | disguise(x) | driving(x) | martial_arts(x) | parkour(x).
+age25(x) | age30(x) | age35(x) | age40(x) | age45(x).
+
+black(x) & black(y) -> -differentFrom(x,y).
+blue(x) & blue(y)-> -differentFrom(x, y).
+green(x) & green(y) -> -differentFrom(x,y).
+purple(x) & purple(y) -> -differentFrom(x,y).
+red(x) & red(y) -> -differentFrom(x,y).
+
+Austin(x) & Austin(y) -> -differentFrom(x,y).
+James(x) & James(y) -> -differentFrom(x,y).
+Jason(x) & Jason(y) -> -differentFrom(x,y).
+Stan(x) & Stan(y) -> -differentFrom(x,y).
+Sterling(x) & Sterling(y) -> -differentFrom(x,y).
+
+Australia(x) & Australia(y) -> -differentFrom(x,y).
+Brazil(x) & Brazil(y) -> -differentFrom(x,y).
+Germany(x) & Germany(y) -> -differentFrom(x,y).
+Libya(x) & Libya(y) -> -differentFrom(x,y).
+Russia(x) & Russia(y) -> -differentFrom(x,y).
+
+clock(x) & clock(y) -> -differentFrom(x,y).
+pen(x) & pen(y) -> -differentFrom(x,y).
+phone(x) & phone(y) -> -differentFrom(x,y).
+ring(x) & ring(y) -> -differentFrom(x,y).
+umbrella(x) & umbrella(y) -> -differentFrom(x,y).
+
+computer_hacking(x) & computer_hacking(y) -> -differentFrom(x,y).
+disguise(x) & disguise(y) -> -differentFrom(x,y).
+driving(x) & driving(y) -> -differentFrom(x,y).
+martial_arts(x) & martial_arts(y) -> -differentFrom(x,y).
+parkour(x) & parkour(y) -> -differentFrom(x,y).
+
+age25(x) & age25(y) -> -differentFrom(x,y).
+age30(x) & age30(y) -> -differentFrom(x,y).
+age35(x) & age35(y) -> -differentFrom(x,y).
+age40(x) & age40(y) -> -differentFrom(x,y).
+age45(x) & age45(y) -> -differentFrom(x,y).
+
+%The clues
+Austin(x) & black(y) -> next_to(x, y).
+umbrella(x) & disguise(y) -> to_the_right(x, y).
+age35(x) <-> Libya(x).
+James(x) <-> age25(x).
+Australia(x) & parkour(y) -> next_to(x, y).
+clock(x) & James(y) -> to_the_right(x, y).
+age40(x) & umbrella(y) & Austin(z) -> between(x,y,z).
+Stan(x) & Russia(y) -> next_to(x, y).
+Sterling(agent1) | Sterling(agent5).
+red(x) <-> age40(x).
+Brazil(x) & age45(y) -> to_the_right(x, y).
+
+Jason(x) & Austin(y) -> to_the_right(x,y).
+driving(x) & age30(y) -> next_to(x,y).
+Australia(x) & age35(y) -> next_to(x,y).
+computer_hacking(x) & age35(y) -> to_the_right(x,y).
+purple(x) & computer_hacking(y) -> next_to(x,y).
+Austin(x) <-> age30(x). 
+phone(x) & Libya(y) -> to_the_right(x,y).
+purple(x) & ring(y) -> somewhere_right(x, y).
+green(agent2).
+age30(x) & Australia(y) -> to_the_right(x, y).
+
+--------------------------------------------------------------
+lady and tiger problema 4.
+
+man(x) -> knight(x) | knave(x) | spy(x).
+knight(x) -> -knave(x) & -spy(x).
+knave(x) -> -knight(x) & -spy(x).
+spy(x) -> -knight(x) & -knave(x).
+knight(x) -> truth(x).
+knave(x) -> -truth(x).
+man(A) & man(B) .
+A != B.
+(exists x knight(x))  & (exists x spy(x)).  
+truth(A) -> spy(B).
+

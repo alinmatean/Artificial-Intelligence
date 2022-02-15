@@ -1,0 +1,33 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+inhabitant(x) -> diurnal(x) | nocturnal(x).
+diurnal(x) -> -nocturnal(x).
+nocturnal(x) -> -diurnal(x).
+inhabitant(x) -> awake(x) | asleep(x).
+awake(x) -> -asleep(x).
+asleep(x) -> -awake(x).
+diurnal(x) & awake(x) -> believe(x). 
+diurnal(x) & asleep(x) -> -believe(x).
+nocturnal(x) & awake(x) -> -believe(x). 
+nocturnal(x) & asleep(x) -> believe(x).
+inhabitant(A).
+believe(A) -> asleep(A) & diurnal(A).
+
+end_of_list.
+
+formulas(goals).
+
+end_of_list.
+

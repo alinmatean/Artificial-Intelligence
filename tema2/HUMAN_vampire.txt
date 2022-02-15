@@ -1,0 +1,33 @@
+%1
+person(x) -> human(x) | vampire(x).
+human(x) -> -vampire(x).
+vampire(x) -> -human(x).
+human(x) -> sane(x) | insane(x).
+vampire(x) -> sane(x) | insane(x).
+human(x) & sane(x) -> truth(x).
+vampire(x) & insane(x) -> truth(x).
+human(x) & insane(x) -> -truth(x).
+vampire(x) & sane(x) -> -truth(x).
+person(Lucy) & person(Minna).
+Lucy != Minna.
+(exists x vampire(x)) & (exists x human(x)). 
+truth(Lucy) -> insane(Lucy) & insane(Minna).
+truth(Lucy) -> -(insane(Lucy) & insane(Minna)).
+
+
+%5
+person(x) -> human(x) | vampire(x).
+human(x) -> -vampire(x).
+vampire(x) -> -human(x).
+human(x) -> sane(x) | insane(x).
+vampire(x) -> sane(x) | insane(x).
+human(x) & sane(x) -> truth(x).
+vampire(x) & insane(x) -> truth(x).
+human(x) & insane(x) -> -truth(x).
+vampire(x) & sane(x) -> -truth(x).
+person(Karl) & person(Martha).
+Karl != Martha.
+(exists x vampire(x)) & (exists x human(x)). 
+(exists x insane(x)) & (exists x sane(x)).
+truth(Karl) -> vampire(Martha).
+truth(Martha) -> insane(Karl). 

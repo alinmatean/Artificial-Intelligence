@@ -1,0 +1,43 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(domain_size, 4).
+  assign(start_size, 4).
+  assign(end_size, 4).
+  assign(max_models, -1).
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+sportiv(x) -> winner(x) | loser(x).
+winner(x) -> -loser(x).
+
+winner(x) -> rapid(x).
+loser(x) -> -rapid(x).
+
+winner(x) -> adevar(x).
+loser(x) -> adevar(x) | -adevar(x).
+
+sportiv(StJuste) & sportiv(Schade) & sportiv(Davies).
+StJuste != Schade & StJuste != Davies & Schade != Davies.
+
+winner(Schade) | winner(Davies) | winner(StJuste).
+-adevar(Schade) | -adevar(Davies) | -adevar(StJuste).
+
+adevar(StJuste) -> -rapid(Davies).
+adevar(Schade) -> -rapid(StJuste).
+adevar(Davies) -> loser(Davies).
+
+end_of_list.
+
+formulas(goals).
+
+end_of_list.
+

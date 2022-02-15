@@ -1,0 +1,243 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(domain_size, 5).
+  assign(start_size, 5).
+  assign(end_size, 5).
+  assign(max_models, -1).
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+% domain size 5: {a,b,c,d,e}.
+
+% 7.5
+differentFrom(a,b).
+differentFrom(a,c).
+differentFrom(a,d).
+differentFrom(a,e).
+differentFrom(b,c).
+differentFrom(b,d).
+differentFrom(b,e).
+differentFrom(c,d).
+differentFrom(c,e).
+differentFrom(d,e).
+
+%the "differentFrom" relation is symmetrical
+%so we won't bother to write it in both directions
+differentFrom(x,y) ->  differentFrom(y,x).
+
+% Define the "right neighbor" relation among a,b,c,d,e
+ rightneighbor(a,b). %b is immediately to the right of a
+ rightneighbor(b,c).
+ rightneighbor(c,d).
+ rightneighbor(d,e).
+ -rightneighbor(a,a).
+ -rightneighbor(a,c).
+ -rightneighbor(a,d).
+ -rightneighbor(a,e).
+ -rightneighbor(b,a).
+ -rightneighbor(b,b).
+ -rightneighbor(b,d).
+ -rightneighbor(b,e).
+ -rightneighbor(c,a).
+ -rightneighbor(c,b).
+ -rightneighbor(c,c).
+ -rightneighbor(c,e).
+ -rightneighbor(d,a).
+ -rightneighbor(d,b).
+ -rightneighbor(d,c).
+ -rightneighbor(d,d).
+ -rightneighbor(e,a).
+ -rightneighbor(e,b).
+ -rightneighbor(e,c).
+ -rightneighbor(e,d).
+ -rightneighbor(e,e).
+
+% 7.7
+ % you are the neighbor of someone either if you live just to his right
+ % or he lives just to your right (i.e., you live just to his left)
+ rightneighbor(x,y) | rightneighbor(y,x) <-> neighbor(x,y).
+
+% 7.8
+% Each house has at least one nationality, pet, drink, color, car.
+
+austrian(x) | belgian(x) | czech(x) | dane(x) | estonian(x).
+alligator(x) | bulldog(x) | cat(x) | donkey(x) | eagle(x).
+advocaat(x) | beer(x) | cider(x) | daiquiri(x) | eiswein(x).
+amber(x) | beige(x) | cyan(x) | denim(x) | emerald(x).
+aston_martin(x) | bugatti(x) | cadillac(x) | dacia(x) | edonis(x).
+
+%7.9
+% Each property applies to at most one house.
+
+austrian(x) & austrian(y) -> -differentFrom(x,y).
+belgian(x) & belgian(y) -> -differentFrom(x,y).
+czech(x) & czech(y) -> -differentFrom(x,y).
+dane(x) & dane(y) -> -differentFrom(x,y).
+estonian(x) & estonian(y) -> -differentFrom(x,y).
+alligator(x) & alligator(y) -> -differentFrom(x,y).
+bulldog(x) & bulldog(y) -> -differentFrom(x,y).
+cat(x) & cat(y) -> -differentFrom(x,y).
+donkey(x) & donkey(y) -> -differentFrom(x,y).
+eagle(x) & eagle(y) -> -differentFrom(x,y).
+beer(x) & beer(y) -> -differentFrom(x,y).
+cider(x) & cider(y) -> -differentFrom(x,y).
+daiquiri(x) & daiquiri(y) -> -differentFrom(x,y).
+eiswein(x) & eiswein(y) -> -differentFrom(x,y).
+advocaat(x) & advocaat(y) -> -differentFrom(x,y).
+amber(x) & amber(y) -> -differentFrom(x,y).
+denim(x) & denim(y) -> -differentFrom(x,y).
+beige(x) & beige(y) -> -differentFrom(x,y).
+emerald(x) & emerald(y) -> -differentFrom(x,y).
+cyan(x) & cyan(y) -> -differentFrom(x,y).
+aston_martin(x) & aston_martin(y) -> -differentFrom(x,y).
+bugatti(x) & bugatti(y) -> -differentFrom(x,y).
+cadillac(x) & cadillac(y) -> -differentFrom(x,y).
+dacia(x) & dacia(y) -> -differentFrom(x,y).
+edonis(x) & edonis(y) -> -differentFrom(x,y).
+
+% 7.10
+% The clues.
+
+austrian(x) <-> amber(x).
+cider(c).
+belgian(x) <-> bulldog(x).
+czech(a).
+dacia(x) & eagle(y) -> neighbor(x,y).
+czech(x) & denim(y) -> neighbor(x,y).
+bugatti(x) <-> cat(x).
+cadillac(x) <-> beige(x).
+advocaat(x) <-> cyan(x).
+dane(x) <-> eiswein(x).
+estonian(x) <-> edonis(x).
+cadillac(x) & donkey(y) -> neighbor(x,y).
+cyan(x) & emerald(y) -> rightneighbor(y,x).
+aston_martin(x) <-> daiquiri(x).
+
+end_of_list.
+
+formulas(goals).
+
+end_of_list.
+
+differentFrom(a,b).
+differentFrom(a,c).
+differentFrom(a,d).
+differentFrom(a,e).
+differentFrom(b,c).
+differentFrom(b,d).
+differentFrom(b,e).
+differentFrom(c,d).
+differentFrom(c,e).
+differentFrom(d,e).
+
+differentFrom(x, y) -> differentFrom(y, x).
+
+rightneighbor(a,b).
+rightneighbor(b,c).
+rightneighbor(c,d).
+rightneighbor(d,e).
+-rightneighbor(a,a).
+-rightneighbor(a,c).
+-rightneighbor(a,d).
+-rightneighbor(a,e).
+-rightneighbor(b,a).
+-rightneighbor(b,b).
+-rightneighbor(b,d).
+-rightneighbor(b,e).
+-rightneighbor(c,a).
+-rightneighbor(c,b).
+-rightneighbor(c,c).
+-rightneighbor(c,e).
+-rightneighbor(d,a).
+-rightneighbor(d,b).
+-rightneighbor(d,c).
+-rightneighbor(d,d).
+-rightneighbor(e,a).
+-rightneighbor(e,b).
+-rightneighbor(e,c).
+-rightneighbor(e,d).
+-rightneighbor(e,e).
+
+rightneighbor(x,y) | rightneighbor(y,x) <-> neighbor(x,y).
+
+andrei(x)|bianca(x)|cosmin(x)|daniel(x)|elena(x).
+raceala(x)|covid(x)|picior(x)|mana(x)|tox(x).
+a21(x)|a34(x)|a19(x)|a14(x)|a18(x).
+bistrita(x)|cluj(x)|iasi(x)|sibiu(x)|brasov(x).
+
+andrei(x) & andrei(y) -> -differentFrom(x,y).
+bianca(x) & bianca(y) -> -differentFrom(x,y).
+cosmin(x) & cosmin(y) -> -differentFrom(x,y).
+daniel(x) & daniel(y) -> -differentFrom(x,y).
+elena(x) & elena(y) -> -differentFrom(x,y).
+
+raceala(x) & raceala(y) -> -differentFrom(x,y).
+covid(x) & covid(y) -> -differentFrom(x,y).
+picior(x) & picior(y) -> -differentFrom(x,y).
+mana(x) & mana(y) -> -differentFrom(x,y).
+tox(x) & tox(y) -> -differentFrom(x,y).
+
+a21(x) & a21(y) -> -differentFrom(x,y).
+a34(x) & a34(y) -> -differentFrom(x,y).
+a19(x) & a19(y) -> -differentFrom(x,y).
+a14(x) & a14(y) -> -differentFrom(x,y).
+a18(x) & a18(y) -> -differentFrom(x,y).
+
+bistrita(x) & bistrita(y) -> -differentFrom(x,y).
+cluj(x) & cluj(y) -> -differentFrom(x,y).
+iasi(x) & iasi(y) -> -differentFrom(x,y).
+sibiu(x) & sibiu(y) -> -differentFrom(x,y).
+brasov(x) & brasov(y) -> -differentFrom(x,y).
+
+%The clues
+a14(d).
+iasi(c).
+a34(x) & iasi(y) ->rightneighbor(x, y). 
+bianca(x) <-> cluj(x).
+bianca(x) <-> covid(x).
+elena(x) <-> a18(x).
+cosmin(x) & daniel(y) -> rightneighbor(x, y). 
+raceala(x) & a34(x) -> neighbor(x, y).
+cosmin(x) <-> picior(x).
+mana(x) & brasov(y) -> rightneighbor(x, y).
+mana(x) <-> sibiu(x).
+tox(x) & a14 (y) -> neighbor(y, x).
+andrei(x) & cluj(y) -> rightneighbor(x, y).
+andrei(x) <-> a21(x).
+
+a14(d).
+iasi(c).
+bianca(x) <-> covid(x).
+elena(x) <-> a18(x).
+tox(x) & mana(y) -> rightneighbor(x, y).
+
+
+%The clues
+a14(d).
+iasi(c).
+bianca(x) <-> covid(x).
+elena(x) <-> a18(x).
+mana(x) & tox(y) -> rightneighbor(x, y).
+mana(x) <-> sibiu(x).
+raceala(x) & cluj(y) -> rightneighbor(x, y).
+andrei(x) <-> a21(x).
+cosmin(x) & daniel(y) -> rightneighbor(x, y).
+a21(x) & cluj(y) -> neighbor(x, y).
+tox(x) <-> brasov(x).
+a34(x) & picior(y) -> neighbor(x, y).
+cosmin(x) <-> picior(x).
+
+
+
+
+
+
